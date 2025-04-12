@@ -13,10 +13,13 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix"
+      "npm run test:related",
+      "eslint --cache --fix",
+      "prettier --write"
     ],
     "*.scss": [
-      "stylelint --fix"
+      "stylelint --fix",
+      "prettier --write"
     ]
   },
   "dependencies": {
@@ -47,6 +50,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
+    "vite-plugin-stylelint": "^6.0.0",
     "vite-plugin-svgr": "^4.3.0"
   }
 }

@@ -1,0 +1,9 @@
+@import 'normalize.css';
+:root {
+  --color-primary: #3498db;
+}
+
+.container {
+  display: grid;
+  gap: 1rem;
+}

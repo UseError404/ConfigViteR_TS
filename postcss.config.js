@@ -1,6 +1,8 @@
 export default {
     plugins: {
-        autoprefixer: {},
+        autoprefixer: {
+            grid: true,
+        },
         cssnano: {}, // Минификация CSS (опционально)
     },
 };

@@ -1,7 +1,21 @@
 {
-  "extends": "stylelint-config-standard-scss",
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-prettier/recommended",
+    "stylelint-order/config/stylelint-order"
+  ],
+  "plugins": ["stylelint-order"],
   "rules": {
     "selector-class-pattern": null,
-    "scss/at-import-partial-extension": null
+    "scss/at-import-partial-extension": null,
+    "order/properties-order": [
+      "position",
+      "top",
+      "display",
+      "width",
+      "margin",
+      "color"
+    ],
+    "scss/at-use-no-unnamespaced": true // Добавьте это правило для @use
   }
 }

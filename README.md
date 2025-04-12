@@ -1,50 +1,48 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Что добавили:
+✅ SCSS/SASS (sass);
+✅ PostCSS + Autoprefixer (postcss, autoprefixer);
+✅ SVGR (vite-plugin-svgr) позволяет импортировать SVG как React-компоненты;
+✅ Алиасы – Короткие пути (@/, @shared/ и т. д.);
+✅ CSS Modules – Изоляция стилей с поддержкой camelCase;
+✅ Code Splitting – Разделение бандла через manualChunks;
+✅ Анализ бандла (rollup-plugin-visualizer);
+✅ Нормализация стилей (normalize.css / modern-normalize);
+✅ Stylelint (stylelint, stylelint-config-standard-scss);
+✅ Pre-commit хуки (husky, lint-staged);
+✅ Оптимизация файлов: JPEG | PNG | GIF | SVG.
 
-Currently, two official plugins are available:
+SVGR ============================================
+import Icon from './icon.svg?react'; // Добавляем ?react
+function ModernComponent() {
+    return (
+        <div>
+            <Icon width={24} height={24} className="red-icon" />
+        </div>
+    );
+}
+=================================================
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Alias ===========================================
+Настройка TypeScript (tsconfig.json)
+{
+"compilerOptions": {
+"baseUrl": "./",
+"paths": {
+"@/*": ["src/*"],
+"@components/*": ["src/shared/ui/*"],
+"@styles/*": ["src/shared/styles/*"]
+}
+}
+}
+-------------------------------------------------
 
-## Expanding the ESLint configuration
+без алиасов
+import Button from '../../../../shared/ui/Button';
+import variables from '../../../../shared/styles/_variables.scss';
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+с алиасами
+import Button from '@components/Button';
+import variables from '@styles/_variables';
+=================================================

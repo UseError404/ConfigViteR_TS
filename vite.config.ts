@@ -4,13 +4,25 @@ import { fileURLToPath, URL } from 'node:url';
 import svgr from 'vite-plugin-svgr';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
+import stylelint from 'vite-plugin-stylelint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    svgr(), // Для работы с SVG как с React-компонентами
-    visualizer({ open: true }), // Визуализация бандла (опционально)
+    svgr({
+      // Опции SVGR (необязательно)
+      svgrOptions: {
+        icon: true,          // Оптимизировать SVG как иконки
+        replaceAttrValues: {
+          '#000': 'currentColor', // Заменяет цвет на currentColor (чтобы управлять через CSS)
+        },
+      },
+    }), // Для работы с SVG как с React-компонентами
+    visualizer({
+      open: true,      // Автоматически открыть отчет после сборки
+      filename: 'stats.html', // Имя файла с отчетом
+    }), // Визуализация бандла (опционально)
     viteImagemin({
       gifsicle: { optimizationLevel: 3 },
       mozjpeg: { quality: 75 },
@@ -22,7 +34,15 @@ export default defineConfig({
           { name: 'removeEmptyAttrs', active: false }
         ]
       }
-    })
+    }),
+    stylelint({
+      fix: true,
+      include: ['src/**/*.{css,scss,sass,less}'], // Расширьте список поддерживаемых файлов
+      exclude: ['node_modules'], // Исключите node_modules
+      cache: true, // Включите кеширование для производительности
+      emitError: true,
+      emitWarning: true,
+    }),
   ],
   resolve: {
     alias: {
@@ -33,11 +53,12 @@ export default defineConfig({
   },
   css: {
     modules: {
-      localsConvention: 'camelCaseOnly', // CSS Modules в camelCase
+      localsConvention: 'camelCase', // button--disabled → buttonDisabled
+      generateScopedName: '[name]__[local]__[hash:base64:5]', // Пример: Button__button__a1b2c
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@shared/styles/_variables.scss"; @import "@shared/styles/_mixins.scss";`,
+        additionalData: `@use "@shared/styles/variables.scss" as *;`,
       },
     },
   },
@@ -52,3 +73,5 @@ export default defineConfig({
     },
   },
 });
+
+
