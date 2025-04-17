@@ -3,6 +3,10 @@ export default {
         autoprefixer: {
             grid: true,
         },
-        cssnano: {}, // Минификация CSS (опционально)
+        cssnano: {
+            preset: 'advanced', // Уровень оптимизации
+            discardComments: { removeAll: true }, // Удалить все комментарии
+            mergeRules: true, // Объединить дублирующиеся правила
+        },
     },
 };
