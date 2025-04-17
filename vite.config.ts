@@ -52,6 +52,7 @@ export default defineConfig({
     },
   },
   css: {
+    postcss: './postcss.config.js',
     modules: {
       localsConvention: 'camelCase', // button--disabled → buttonDisabled
       generateScopedName: '[name]__[local]__[hash:base64:5]', // Пример: Button__button__a1b2c
