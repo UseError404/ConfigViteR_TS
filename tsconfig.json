@@ -15,8 +15,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "noEmit": true, // Добавлено для совместимости с allowImportingTsExtensions
-    "allowImportingTsExtensions": true // Теперь будет работать
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
