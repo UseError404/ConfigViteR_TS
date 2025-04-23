@@ -6,11 +6,16 @@ import {visualizer} from 'rollup-plugin-visualizer';
 import viteImagemin from 'vite-plugin-imagemin';
 import stylelint from 'vite-plugin-stylelint';
 import viteCompression from 'vite-plugin-compression';
+import AutoImport from 'unplugin-auto-import/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
         react(),
+        AutoImport({
+            imports: ['react', 'react-router-dom'],
+            dts: 'src/auto-imports.d.ts',
+        }),
         svgr({
             // Опции SVGR (необязательно)
             svgrOptions: {
@@ -66,7 +71,7 @@ export default defineConfig({
         },
         preprocessorOptions: {
             scss: {
-                additionalData: `@use "@shared/styles/variables.scss" as *;`,
+                additionalData: `@use "@shared/styles/variables.scss" as *; @use "@shared/styles/mixin.scss" as *;`,
             },
         },
     },

@@ -4,7 +4,7 @@ export default {
             grid: true,
         },
         cssnano: {
-            preset: 'advanced', // Уровень оптимизации
+            preset: 'default', // Уровень оптимизации
             discardComments: { removeAll: true }, // Удалить все комментарии
             mergeRules: true, // Объединить дублирующиеся правила
         },
